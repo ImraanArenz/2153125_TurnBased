@@ -9,6 +9,8 @@ public class GameUnitScript : MonoBehaviour
     public int MagicDamageOutput;
     public int MaximumHealth;
     public int CurrentHealth;
+    public ParticleSystem DamagePart;
+    public ParticleSystem MagicPart;
 
     public bool Damage(int Damnage)
     {

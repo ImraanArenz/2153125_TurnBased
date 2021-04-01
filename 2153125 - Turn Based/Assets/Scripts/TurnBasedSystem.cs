@@ -43,7 +43,8 @@ public class TurnBasedSystem : MonoBehaviour
     IEnumerator Attack()
     {
         bool Dead = EnemyCharUnit.Damage(PlayerCharUnit.DamageOutput);
-        infoText.text = "Got em!";
+        Instantiate(EnemyCharUnit.DamagePart);
+        infoText.text = "Dealt Slashing Damage!!!";
 
         yield return new WaitForSeconds(1f);
 
@@ -64,7 +65,8 @@ public class TurnBasedSystem : MonoBehaviour
     IEnumerator MagicAttack()
     {
         bool Dead = EnemyCharUnit.MagicDamage(PlayerCharUnit.MagicDamageOutput);
-        infoText.text = "Mystic damage dealt!!!";
+        Instantiate(EnemyCharUnit.MagicPart);
+        infoText.text = "Virus corruption damage!!!";
 
         yield return new WaitForSeconds(3f);
 
@@ -94,12 +96,13 @@ public class TurnBasedSystem : MonoBehaviour
 
     IEnumerator EnemyNoTurn()
     {
-        infoText.text = EnemyCharUnit.UnitName + "strikes!";
+        infoText.text = EnemyCharUnit.UnitName + " lunges and deals some physical damage!!";
         yield return new WaitForSeconds(2f);
 
         bool Dead = PlayerCharUnit.Damage(EnemyCharUnit.DamageOutput);
 
         playerHUD.PlayerHP(PlayerCharUnit.CurrentHealth);
+        Instantiate(PlayerCharUnit.DamagePart);
         yield return new WaitForSeconds(2f);
 
         if (Dead)

@@ -100,3 +100,5 @@ MonoBehaviour:
   MagicDamageOutput: 14
   MaximumHealth: 30
   CurrentHealth: 30
+  DamagePart: {fileID: 2988407172764667476, guid: cb1906f9d926c67458c3b9d6984dcf5b, type: 3}
+  MagicPart: {fileID: 4074417813459513968, guid: 2dbf97d709911874ea623ebf9fb23ca8, type: 3}
