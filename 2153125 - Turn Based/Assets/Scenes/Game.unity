@@ -1078,6 +1078,7 @@ MonoBehaviour:
   playerHUD: {fileID: 2146894534}
   enemyHUD: {fileID: 360877209}
   infoText: {fileID: 1550393724}
+  Protago: {fileID: 4415660837463610676, guid: 5aaa49b01043c3646b393934ee189080, type: 3}
 --- !u!4 &886093600
 Transform:
   m_ObjectHideFlags: 0

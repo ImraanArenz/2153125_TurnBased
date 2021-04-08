@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BattleStateMachine { BeginBattle, PlayerTurn, EnemyTurn, PlayerWin, PlayerLose}
 public class TurnBasedSystem : MonoBehaviour
@@ -16,11 +17,13 @@ public class TurnBasedSystem : MonoBehaviour
     public HUD playerHUD;
     public HUD enemyHUD;
     public Text infoText;
+    public PlayerScript Protago;
 
     private void Start()
     {
         CurrentState = BattleStateMachine.BeginBattle;
         StartCoroutine(StartBattle());
+        
 
     }
 
@@ -87,6 +90,9 @@ public class TurnBasedSystem : MonoBehaviour
         if (CurrentState == BattleStateMachine.PlayerWin)
         {
             infoText.text = "You Win!";
+            Protago.PassPt++;
+            SceneManager.LoadScene("Hub Level");
+            this.gameObject.SetActive(false);
         }
         else if(CurrentState == BattleStateMachine.PlayerLose)
         {
