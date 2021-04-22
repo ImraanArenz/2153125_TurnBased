@@ -7,6 +7,8 @@ public class HUD : MonoBehaviour
 {
     public Text PlayerName;
     public Slider HP;
+    public GameUnitScript PC;
+
 
     public void TheHUD(GameUnitScript GameUnit)
     {
@@ -19,4 +21,5 @@ public class HUD : MonoBehaviour
     {
         HP.value = HealPo;
     }
+
 }

@@ -15,18 +15,27 @@ public class TurnBasedSystem : MonoBehaviour
     GameUnitScript PlayerCharUnit;
     GameUnitScript EnemyCharUnit;
     public HUD playerHUD;
-    public HUD enemyHUD;
+    public EnemyHUD enemyHUD;
     public Text infoText;
+    public Text MPText;
     public PlayerScript Protago;
+    public Button LIMITBREAKBUTT;
+    public Button MPButton;
 
     private void Start()
     {
         CurrentState = BattleStateMachine.BeginBattle;
         StartCoroutine(StartBattle());
+        LIMITBREAKBUTT.gameObject.SetActive(false);
         
-
     }
-
+    private void Update()
+    {
+        if(PlayerCharUnit.CurrentHealth <= PlayerCharUnit.LimitBreakDamageThreshold)
+        {
+            LIMITBREAKBUTT.gameObject.SetActive(true);
+        }
+    }
     IEnumerator StartBattle()
     {
         GameObject PlayerObj = Instantiate(PlayerPrefabObject, PlayerPos);
@@ -56,7 +65,7 @@ public class TurnBasedSystem : MonoBehaviour
         if (Dead)
         {
             CurrentState = BattleStateMachine.PlayerWin;
-            battleOver();
+            BattleOver();
         }
         else
         {
@@ -67,16 +76,23 @@ public class TurnBasedSystem : MonoBehaviour
 
     IEnumerator MagicAttack()
     {
+        //PlayerCharUnit.MP.ToString() == MPText.text;
+        PlayerCharUnit.MP--;
+        MPText.text = PlayerCharUnit.MP.ToString();
         bool Dead = EnemyCharUnit.MagicDamage(PlayerCharUnit.MagicDamageOutput);
         Instantiate(EnemyCharUnit.MagicPart);
         infoText.text = "Virus corruption damage!!!";
 
+        if(PlayerCharUnit.MP <= 0)
+        {
+            MPButton.gameObject.SetActive(false);
+        }
         yield return new WaitForSeconds(3f);
 
         if (Dead)
         {
             CurrentState = BattleStateMachine.PlayerWin;
-            battleOver();
+            BattleOver();
         }
         else
         {
@@ -85,14 +101,14 @@ public class TurnBasedSystem : MonoBehaviour
         }
     }
 
-    public void battleOver()
+    public void BattleOver()
     {
         if (CurrentState == BattleStateMachine.PlayerWin)
         {
             infoText.text = "You Win!";
             Protago.PassPt++;
             SceneManager.LoadScene("Hub Level");
-            this.gameObject.SetActive(false);
+            
         }
         else if(CurrentState == BattleStateMachine.PlayerLose)
         {
@@ -105,16 +121,16 @@ public class TurnBasedSystem : MonoBehaviour
         infoText.text = EnemyCharUnit.UnitName + " lunges and deals some physical damage!!";
         yield return new WaitForSeconds(2f);
 
-        bool Dead = PlayerCharUnit.Damage(EnemyCharUnit.DamageOutput);
+        bool PlayerDead = PlayerCharUnit.Damage(EnemyCharUnit.DamageOutput);
 
         playerHUD.PlayerHP(PlayerCharUnit.CurrentHealth);
         Instantiate(PlayerCharUnit.DamagePart);
         yield return new WaitForSeconds(2f);
 
-        if (Dead)
+        if (PlayerDead)
         {
             CurrentState = BattleStateMachine.PlayerLose;
-            battleOver();
+            BattleOver();
         }
         else
         {
@@ -124,6 +140,26 @@ public class TurnBasedSystem : MonoBehaviour
 
 
     }
+
+    IEnumerator LimitBREAK()
+    {
+        bool Dead = EnemyCharUnit.LimitBreakDamage(PlayerCharUnit.LimitBreakDamageOutput);
+        Instantiate(PlayerCharUnit.LimitBREAKPart);
+        infoText.text = "LIMIT BREAK!!!!!";
+
+        yield return new WaitForSeconds(3f);
+
+        if (Dead)
+        {
+            CurrentState = BattleStateMachine.PlayerWin;
+            BattleOver();
+        }
+        else
+        {
+            CurrentState = BattleStateMachine.EnemyTurn;
+            StartCoroutine(EnemyNoTurn());
+        }
+    } 
     void PlayerNoTurn()
     {
         infoText.text = "Select";
@@ -150,6 +186,18 @@ public class TurnBasedSystem : MonoBehaviour
         else
         {
             StartCoroutine(MagicAttack());
+        }
+    }
+
+    public void LimitBREAKButton()
+    {
+        if(CurrentState != BattleStateMachine.PlayerTurn)
+        {
+            return;
+        }
+        else
+        {
+            StartCoroutine(LimitBREAK());
         }
     }
 }

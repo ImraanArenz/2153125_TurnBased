@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3463131856454642697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 7, z: 1}
+  m_LocalScale: {x: 0.025, y: 0.025, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 99f0dbddb1e03d343a48113ff9b7c0c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,9 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitName: Player
-  DamageOutput: 8
-  MagicDamageOutput: 14
-  MaximumHealth: 30
-  CurrentHealth: 30
+  DamageOutput: 10
+  MagicDamageOutput: 15
+  MaximumHealth: 125
+  CurrentHealth: 125
+  LimitBreakDamageOutput: 50
+  LimitBreakDamageThreshold: 50
+  MP: 4
   DamagePart: {fileID: 2988407172764667476, guid: cb1906f9d926c67458c3b9d6984dcf5b, type: 3}
   MagicPart: {fileID: 4074417813459513968, guid: 2dbf97d709911874ea623ebf9fb23ca8, type: 3}
+  LimitBREAKPart: {fileID: 4663588530206396192, guid: bb7cc809dbef3d24a81fc8d7c352910f, type: 3}

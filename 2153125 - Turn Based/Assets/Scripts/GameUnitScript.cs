@@ -9,9 +9,12 @@ public class GameUnitScript : MonoBehaviour
     public int MagicDamageOutput;
     public int MaximumHealth;
     public int CurrentHealth;
+    public int LimitBreakDamageOutput;
+    public int LimitBreakDamageThreshold;
+    public int MP;
     public ParticleSystem DamagePart;
     public ParticleSystem MagicPart;
-
+    public ParticleSystem LimitBREAKPart;
     public bool Damage(int Damnage)
     {
         CurrentHealth -= Damnage;
@@ -32,6 +35,20 @@ public class GameUnitScript : MonoBehaviour
         CurrentHealth -= MagDam;
 
         if (CurrentHealth <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool LimitBreakDamage(int LimitBreakDam)
+    {
+        CurrentHealth -= LimitBreakDam;
+
+        if(CurrentHealth <= 0)
         {
             return true;
         }
