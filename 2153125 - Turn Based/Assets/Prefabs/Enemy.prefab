@@ -96,13 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitName: Enemy
-  DamageOutput: 10
+  DamageOutput: 12
   MagicDamageOutput: 0
   MaximumHealth: 125
   CurrentHealth: 125
   LimitBreakDamageOutput: 0
   LimitBreakDamageThreshold: 0
   MP: 0
+  LBPoint: 1
   DamagePart: {fileID: 2988407172764667476, guid: cb1906f9d926c67458c3b9d6984dcf5b, type: 3}
   MagicPart: {fileID: 4074417813459513968, guid: 2dbf97d709911874ea623ebf9fb23ca8, type: 3}
   LimitBREAKPart: {fileID: 2988407172764667476, guid: cb1906f9d926c67458c3b9d6984dcf5b, type: 3}

@@ -35,6 +35,11 @@ public class TurnBasedSystem : MonoBehaviour
         {
             LIMITBREAKBUTT.gameObject.SetActive(true);
         }
+
+        if (PlayerCharUnit.LBPoint == 0)
+        {
+            LIMITBREAKBUTT.gameObject.SetActive(false);
+        }
     }
     IEnumerator StartBattle()
     {
@@ -143,6 +148,7 @@ public class TurnBasedSystem : MonoBehaviour
 
     IEnumerator LimitBREAK()
     {
+        PlayerCharUnit.LBPoint--;
         bool Dead = EnemyCharUnit.LimitBreakDamage(PlayerCharUnit.LimitBreakDamageOutput);
         Instantiate(PlayerCharUnit.LimitBREAKPart);
         infoText.text = "LIMIT BREAK!!!!!";

@@ -12,6 +12,7 @@ public class GameUnitScript : MonoBehaviour
     public int LimitBreakDamageOutput;
     public int LimitBreakDamageThreshold;
     public int MP;
+    public int LBPoint = 1;
     public ParticleSystem DamagePart;
     public ParticleSystem MagicPart;
     public ParticleSystem LimitBREAKPart;
